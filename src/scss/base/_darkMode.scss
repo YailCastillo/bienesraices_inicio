@@ -37,11 +37,15 @@
     }
 
     .formulario {
-        legend, label {
+        legend, label, p {
             color: v.$gris;
         }
 
-        p {
+        input:not([type="submit"]),
+        textarea,
+        select {
+            background-color: v.$grisOscuro;
+            border: 1px solid v.$grisOscuro;
             color: v.$blanco;
         }
     }
