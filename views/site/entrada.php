@@ -1,5 +1,5 @@
 <?php
-    require 'includes/functions.php';
+    require '../../includes/functions.php';
     incluirTemplate('header');
     
 ?>
@@ -8,9 +8,9 @@
     <h1>Casa en Venta frente al bosque</h1>
 
     <picture>
-        <source srcset="build/img/destacada2.webp" type="image/webp">
-        <source srcset="build/img/destacada2.jpg" type="image/jpeg">
-        <img loading="lazy" src="build/img/destacada2.jpg" alt="imagen destacada">
+        <source srcset="../../build/img/destacada2.webp" type="image/webp">
+        <source srcset="../../build/img/destacada2.jpg" type="image/jpeg">
+        <img loading="lazy" src="../../build/img/destacada2.jpg" alt="imagen destacada">
     </picture>
 
     <div class="resumen-propiedad">
