@@ -1,0 +1,12 @@
+<?php
+
+function conectarDB() {
+    $db = mysqli_connect('localhost', 'root', 'perolin1', 'bienesraices_crud');
+
+    if (!$db) {
+        echo 'Error, no se pudo conectar';
+        exit;
+    }
+
+    return $db;
+}
