@@ -1,6 +1,6 @@
 <?php
 
-function conectarDB() {
+function conectarDB() : mysqli {
     $db = mysqli_connect('localhost', 'root', 'perolin1', 'bienesraices_crud');
 
     if (!$db) {
