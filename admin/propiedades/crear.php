@@ -74,7 +74,7 @@
 <main class="contenedor seccion">
     <h1>Crear</h1>
 
-    <a href="../index.php" class="boton boton-amarillo">Regresar</a>
+    <a style="margin-bottom: 2rem;" href="../index.php" class="boton boton-amarillo">Regresar</a>
 
     <?php foreach($errors as $error) {?>
         <div class="alerta error">
