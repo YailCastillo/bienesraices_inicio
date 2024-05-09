@@ -51,9 +51,9 @@
         //Asignar FILES a una variable
         $imagen = $_FILES['imagen'];
 
-        echo "<pre>";
-        var_dump($imagen);
-        echo "</pre>";
+        // echo "<pre>";
+        // var_dump($imagen);
+        // echo "</pre>";
 
         if (!$titulo) {
             $errors[] = "Deber añadir un título";
@@ -90,24 +90,32 @@
 
     //Revisar que el arreglo de errores esté vacío
         if (empty($errors)) {
-
-            /* SUBIDA DE ARCHIVOS */
-
-            //Crear carpeta
+            // Crear carpeta
             $carpetaImagenes = '../../imagenes/';
-            
+                
             if (!is_dir($carpetaImagenes)) {
                 mkdir($carpetaImagenes);
             }
 
-            //Generar un nombre único
-            $nombreImagen = md5(uniqid(rand(), true)) . '.jpg';
+            $nombreImagen = '';
 
-            //Subir imagen
-            move_uploaded_file($imagen['tmp_name'], $carpetaImagenes . $nombreImagen);
+            /* SUBIDA DE ARCHIVOS */
+
+            if ($imagen['name']) {
+                //Eliminar imagen anterior
+                unlink($carpetaImagenes . $propiedad['imagen']);
+
+                //Generar un nombre único
+                $nombreImagen = md5(uniqid(rand(), true)) . '.jpg';
+
+                //Subir imagen
+                move_uploaded_file($imagen['tmp_name'], $carpetaImagenes . $nombreImagen);
+            } else {
+                $nombreImagen = $propiedad['imagen'];
+            }
 
             //Insertar en la base de datos
-            $query = "UPDATE propiedades SET titulo = '$titulo', precio = '$precio', descripcion = '$descripcion', habitaciones = $habitaciones, wc = $wc, estacionamiento = $estacionamiento, vendedorId = $vendedorId WHERE id = $id";
+            $query = "UPDATE propiedades SET titulo = '$titulo', precio = '$precio', imagen = '$nombreImagen', descripcion = '$descripcion', habitaciones = $habitaciones, wc = $wc, estacionamiento = $estacionamiento, vendedorId = $vendedorId WHERE id = $id";
 
             // echo $query;
 
@@ -115,7 +123,7 @@
 
             if ($resultado) {
                 //Redireccionar al usuario
-                header("Location: ../index.php?resultado=1");
+                header("Location: ../index.php?resultado=2");
             }
         }
     }
