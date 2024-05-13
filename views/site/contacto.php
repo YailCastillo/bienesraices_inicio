@@ -8,9 +8,9 @@
     <h1>Contacto</h1>
 
     <picture>
-        <source srcset="build/img/destacada3.webp" type="image/webp">
-        <source srcset="build/img/destacada3.jpg" type="image/jpeg">
-        <img loading="lazy" src="build/img/destacada3.jpg" alt="imgane contacto">
+        <source srcset="../../build/img/destacada3.webp" type="image/webp">
+        <source srcset="../../build/img/destacada3.jpg" type="image/jpeg">
+        <img loading="lazy" src="../../build/img/destacada3.jpg" alt="imagen contacto">
     </picture>
 
     <h2>Llene el formulario de Contacto</h2>
