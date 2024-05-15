@@ -1,6 +1,17 @@
 <?php
+    require '../../includes/functions.php';
+
+    $auth = estaAutenticado();
+
+    if (!$auth) {
+        header('Location: ../../views/site/index.php');
+    }
+
+    //Incluye un template
+    incluirTemplate('header');
+
     //Importar la conexión
-    require '../includes/config/db.php';
+    require '../../includes/config/db.php';
     $db = conectarDB();
 
     //Escribir el query
@@ -22,7 +33,7 @@
             $resultado = mysqli_query($db, $query);
             $propiedad = mysqli_fetch_assoc($resultado);
 
-            unlink("../imagenes/" . $propiedad['imagen']);
+            unlink("../../imagenes/" . $propiedad['imagen']);
 
             //Eliminar propiedad
             $query = "DELETE FROM propiedades WHERE id = $id";
@@ -33,10 +44,6 @@
             }
         }
     }
-    
-    //Incluye un template
-    require '../includes/functions.php';
-    incluirTemplate('header2');
     
 ?>
 
@@ -51,7 +58,7 @@
         <p class="alerta exito">Anuncio Eliminado Correctamente</p>
     <?php } ?>
 
-    <a href="propiedades/crear.php" class="boton boton-verde">Nueva propiedad</a>
+    <a href="../propiedades/crear.php" class="boton boton-verde">Nueva propiedad</a>
 
     <table class="propiedades">
         <thead>
@@ -69,14 +76,14 @@
             <tr>
                 <td><?= $propiedad['id'] ?></td>
                 <td><?= $propiedad['titulo'] ?></td>
-                <td><img src="../imagenes/<?= $propiedad['imagen'] ?>" class="imagen-tabla"></td>
+                <td><img src="../../imagenes/<?= $propiedad['imagen'] ?>" class="imagen-tabla"></td>
                 <td>$<?= $propiedad['precio'] ?></td>
                 <td>
                     <form action="" method="post" class="w-100">
                         <input type="hidden" name="id" value="<?= $propiedad['id'] ?>">
                         <input type="submit" class="boton-rojo-block" value="Eliminar">
                     </form>
-                    <a href="propiedades/actualizar.php?id=<?= $propiedad['id'] ?>" class="boton-amarillo-block">Actualizar</a>
+                    <a href="../propiedades/actualizar.php?id=<?= $propiedad['id'] ?>" class="boton-amarillo-block">Actualizar</a>
                 </td>
             </tr>
             <?php } ?>
@@ -88,5 +95,5 @@
     //Cerrar la conexión
     mysqli_close($db);
 
-    incluirTemplate('footer2');
+    incluirTemplate('footer');
 ?>
