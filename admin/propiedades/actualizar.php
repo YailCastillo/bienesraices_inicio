@@ -1,4 +1,14 @@
 <?php
+    require '../../includes/functions.php';
+
+    $auth = estaAutenticado();
+
+    if (!$auth) {
+        header('Location: ../../views/site/index.php');
+    }
+
+    //Incluye un template
+    incluirTemplate('header');
 
     $id = $_GET['id'];
     $id = filter_var($id, FILTER_VALIDATE_INT);
@@ -127,15 +137,12 @@
             }
         }
     }
-
-    require '../../includes/functions.php';
-    incluirTemplate('header');
 ?>
 
 <main class="contenedor seccion">
     <h1>Actualizar</h1>
 
-    <a style="margin-bottom: 2rem;" href="../index.php" class="boton boton-amarillo">Regresar</a>
+    <a style="margin-bottom: 2rem;" href="../site/index.php" class="boton boton-amarillo">Regresar</a>
 
     <?php foreach($errors as $error) {?>
         <div class="alerta error">
