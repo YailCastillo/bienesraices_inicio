@@ -1,6 +1,5 @@
 <?php
     //Importar base de datos
-    require '../../includes/config/db.php';
     $db = conectarDB();
 
     //Consultar

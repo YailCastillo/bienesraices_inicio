@@ -1,17 +1,11 @@
 <?php
-    require '../../includes/functions.php';
-
-    $auth = estaAutenticado();
-
-    if (!$auth) {
-        header('Location: ../../views/site/index.php');
-    }
-
-    //Incluye un template
+    require '../../includes/app.php';
     incluirTemplate('header');
+    use App\Propiedad;
+    
+    estaAutenticado();
 
     //Base de datos
-    require '../../includes/config/db.php';
     $db = conectarDB();
 
     //Consultar para obtener vendedores
@@ -32,12 +26,11 @@
     //Ejecutar el código después de que el usuario envía el formulario
     if ($_SERVER["REQUEST_METHOD"] === 'POST') {
 
-        // echo "<pre>";
-        // var_dump($_POST);
-        // echo "</pre>";
-        // echo "<pre>";
-        // var_dump($_FILES);
-        // echo "</pre>";
+        $propiedad = new Propiedad($_POST);
+
+        $propiedad->save();
+
+        debugger($propiedad);
 
         $titulo = mysqli_real_escape_string($db, $_POST['titulo']);
         $precio = mysqli_real_escape_string($db, $_POST['precio']);
@@ -107,9 +100,6 @@
             //Subir imagen
             move_uploaded_file($imagen['tmp_name'], $carpetaImagenes . $nombreImagen);
 
-            //Insertar en la base de datos
-            $query = "INSERT INTO propiedades (titulo, precio, imagen, descripcion, habitaciones, wc, estacionamiento, creado, vendedorId) VALUES('$titulo', '$precio', '$nombreImagen', '$descripcion', '$habitaciones', '$wc', '$estacionamiento', '$creado', '$vendedorId') ";
-
             // echo $query;
 
             $resultado = mysqli_query($db, $query);
@@ -163,7 +153,7 @@
 
         <fieldset>
             <legend>Vendedor</legend>
-            <select name="vendedor">
+            <select name="vendedorId">
                 <option value="">--Seleccione--</option>
                 <?php while($vendedor = mysqli_fetch_assoc($resultado)) { ?>
                     <option <?php echo $vendedorId === $vendedor['id'] ? 'selected' : ""; ?> value="<?php echo $vendedor['id']; ?>"><?php echo $vendedor['nombre'] . " " . $vendedor['apellido']; ?></option>
