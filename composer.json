@@ -1,0 +1,17 @@
+{
+    "name": "yailcastillo/bienesraices_inicio",
+    "description": "Creando un proyecto con POO",
+    "type": "project",
+    "authors": [
+        {
+            "name": "YailCastillo",
+            "email": "yailcastillomtz@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\" : "./classes"
+        }
+    }
+}
