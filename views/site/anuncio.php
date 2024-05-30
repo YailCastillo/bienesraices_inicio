@@ -1,5 +1,5 @@
 <?php
-    require '../../includes/functions.php';
+    require '../../includes/app.php';
     incluirTemplate('header');
 
     //Obtener ID
@@ -11,7 +11,6 @@
     }
 
     //Importar base de datos
-    require '../../includes/config/db.php';
     $db = conectarDB();
 
     //Consultar
